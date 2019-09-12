@@ -1,6 +1,6 @@
 <?php
 
-route::any('event'.'EventController@event');
+Route::any('event','EventController@event');
 
 
 //月考试货物
