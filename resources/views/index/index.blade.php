@@ -46,7 +46,7 @@
       @foreach($goodsdata as $k=>$v)
       <div class="index-pro1-list">
        <dl>
-        <dt><a href="{{url('index/detail/'.$v->goods_id)}}"><img src="{{env('INC')}}{{$v->goods_img}}"></a></dt>
+        <dt><a href="{{url('index/detail/'.$v->goods_id)}}"><img src="{{env('IMG')}}{{$v->goods_img}}"></a></dt>
         <dd class="ip-text"><a href="{{url('index/detail/'.$v->goods_id)}}">{{$v->goods_name}}</a><span>已售：488</span></dd>
         <dd class="ip-price"><strong>¥{{$v->goods_price}}</strong> <span>¥{{$v->goods_oldprice}}</span></dd>
        </dl>

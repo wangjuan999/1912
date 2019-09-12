@@ -1,4 +1,8 @@
 <?php
+
+route::any('event'.'EventController@event');
+
+
 //月考试货物
 Route::prefix('cargo')->middleware('checklogin')->group(function(){
 	Route::get('register','CargologinController@register');
@@ -166,3 +170,17 @@ Route::prefix('admin')->middleware('checklogin')->group(function(){
 
 	Route::get('upload','WechatController@upload');
 	Route::post('upload_do','WechatController@upload_do');
+
+
+
+//标签
+route::get('tag/tag_list','TagController@tag_list');
+route::get('tag/tag_add','TagController@tag_add');	
+route::post('tag/tag_add_do','TagController@tag_add_do');
+route::get('tag/tag_del/{id}','TagController@tag_del');
+route::get('tag/tag_update/{id}','TagController@tag_update');
+
+
+
+//模板接口测试号
+route::get('send_template_message','TagController@send_template_message');

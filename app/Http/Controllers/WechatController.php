@@ -5,35 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Validator;
+use App\Tools\Tools;
 
 class WechatController extends Controller
 {
     public function get_access_token()
     {
         // echo 111;die;
-        return $this->get_wechat_access_token();
+        return $this->tools->get_wechat_access_token();
     }
-//    获取access_token
-    public function get_wechat_access_token()
-    {
-        $redis = new \Redis();
-        $redis->connect('127.0.0.1','6379');
-//        加入缓存
-        $access_token_key = "wechat_access_token";
-        if ($redis->exists($access_token_key)) {
-//         存在 直接返回
-            return $redis->get($access_token_key);
-        } else {
-//        不存在获取
-            // 获取access_token
-            $result = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . env('WECHAT_APPID') . '&secret=' . env('WECHAT_APPSECRET'));
-            $re = json_decode($result, 1);
-//        dd($re);
-            $redis->set($access_token_key, $re['access_token'], $re['expires_in']);//加入缓存
-            return $re['access_token'];
-
-        }
-    }
+    
 
     public function get_user_list()
     {
@@ -86,10 +67,12 @@ class WechatController extends Controller
                 // dd($path);die;
                 $path=realpath('./storage/'.$path);
                 // dd($path);
-                $url='';
 
 
             }
       }
+
+
+      
 
 }
