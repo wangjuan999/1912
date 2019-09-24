@@ -26,6 +26,7 @@
       <li><a href="{{url('login/logins')}}">登录</a></li>
       <li><a href="{{url('login/register')}}">注册</a></li>
       <li><a href="{{url('wechat_login')}}"  class="rlbg">第三方微信登录</a></li>
+      <li><a href="{{url('exam/index')}}"  class="rlbg">粉丝列表</a></li>
 
       <div class="clearfix"></div>
      </ul><!--reg-login-click/-->

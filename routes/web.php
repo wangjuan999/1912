@@ -2,6 +2,39 @@
 
 Route::any('event','EventController@event');
 
+//菜单
+Route::any('create_menu','MenuController@create_menu');
+Route::any('menu','MenuController@menu');
+Route::any('create_menu_do','MenuController@create_menu_do');
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+//微信周考
+// route::prefix('exam')->middleware('checklogin')->group(function(){
+	
+// });
+route::get('exam/login','ExamController@login');
+// // Route::get('exam/login','LoginWechatController@login');
+Route::get('exam/wechat_login','ExamController@wechat_login');
+Route::get('exam/code','ExamController@code');
+Route::get('exam/index','ExamController@index');
+Route::get('exam/funs','ExamController@funs');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
+///生成唯一二维码
+route::any('agent/agent_list','AgentController@agent_list');
+route::any('agent/create_qrcode','AgentController@create_qrcode');
+
+
+
+
+
+
 
 //月考试货物
 Route::prefix('cargo')->middleware('checklogin')->group(function(){
@@ -22,26 +55,6 @@ Route::prefix('cargo')->middleware('checklogin')->group(function(){
 Route::get('cargo/login','CargologinController@login');
 Route::post('cargo/login_do','CargologinController@login_do');
 
-
-
-//比赛竞猜周考
-Route::get('game/add','GameController@add');
-Route::post('game/add_do','GameController@add_do');
-Route::get('game/index','GameController@index');
-Route::get('game/result/{id}','GameController@result');
-Route::get('game/ask/{id}','GameController@ask');
-Route::get('game/ask_do','GameController@ask_do');
-
-
-//新闻周考
-Route::prefix('news')->middleware('checklogin')->group(function(){
-	Route::get('index','newsController@index');
-	Route::get('add','newsController@add');
-	Route::post('add_do','newsController@add_do');
-	Route::get('address/{id}','newsController@address');
-	Route::get('dian','newsController@dian');
-
-});
 
 
 
@@ -179,8 +192,17 @@ route::get('tag/tag_add','TagController@tag_add');
 route::post('tag/tag_add_do','TagController@tag_add_do');
 route::get('tag/tag_del/{id}','TagController@tag_del');
 route::get('tag/tag_update/{id}','TagController@tag_update');
-
+route::get('tag/tag_lists','TagController@tag_lists');
 
 
 //模板接口测试号
 route::get('send_template_message','TagController@send_template_message');
+
+
+
+//考试练习1
+route::get('lianone/one_list','LianoneController@one_list');
+// Route::get('login/logins','LoginController@logins');
+route::get('lianone/one_add','LianoneController@one_add');
+route::post('lianone/one_add_do','LianoneController@one_add_do');
+route::get('lianone/one_biao','LianoneController@one_biao');

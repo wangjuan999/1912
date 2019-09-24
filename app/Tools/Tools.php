@@ -27,8 +27,9 @@ class Tools
        
         $data=curl_exec($curl);
         $errno=curl_errno($curl);///错误码
+        // dd($errno);
         $err_msg=curl_error($curl);//错误信息
-
+        
         curl_close($curl);
         return $data;
     }

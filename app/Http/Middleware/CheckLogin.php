@@ -18,7 +18,7 @@ class CheckLogin
         //执行动作
         $user = session('username');
         if(!$user){
-            return redirect('cargo/login');
+            return redirect('exam/login');
         }
         return $next($request);
     }

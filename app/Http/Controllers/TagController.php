@@ -27,12 +27,12 @@ class TagController extends Controller
     {
         return view('tag/tag_add');
     }
-
+//添加标签
     public function tag_add_do(Request $request)
     {
 //        echo 11;
         $data = $request->all();
-//        dd($data);
+       // dd($data);
         $data = [
             'tag'=>[
                 'name' => $data['tag_name']
@@ -40,11 +40,33 @@ class TagController extends Controller
         ];
 //        dd($data);
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/create?access_token='.$this->tools->get_wechat_access_token();
-        $re = $this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
+        $re = $this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));//JSON_UNESCAPED_UNICODE保证中文不被转义成字母编码格式
         // dd($re);
-        $res = json_decode($re,1);
+        $res = json_decode($re,1);//json_decode：json字符串转json对象 json_encode：json对象转json字符串
         return redirect('tag/tag_list');
     }
+
+
+//粉丝列表
+        public function tag_lists(Request $request)
+        {
+            $req = $request->all();
+            // dd($req);
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token='.$this->tools->get_wechat_access_token();
+            // dd($url);
+            $data = [
+                'id' =>$req['id'],
+                'next_openid'=>'',
+            ];
+            $res=$this->tools->curl_post($url,json_encode($data));
+            $result=json_decode($res,1);
+
+            dd($result);
+            // return view('tag/tag_lists');
+        }
+
+
+
 
 
 
