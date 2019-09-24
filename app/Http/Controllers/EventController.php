@@ -20,7 +20,7 @@ class EventController extends Controller
         \Log::Info(json_encode($xml_arr,JSON_UNESCAPED_UNICODE));
         //echo $_GET['echostr'];
         //业务逻辑
-        dd($xml_arr);
+        // dd($xml_arr);
         if($xml_arr['MsgType'] == 'event'){
             if($xml_arr['Event'] == 'subscribe'){
                 $share_code = explode('_',$xml_arr['EventKey'])[1];
@@ -39,5 +39,6 @@ class EventController extends Controller
         $message = '欢迎关注！';
         $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
         echo $xml_str;
+        dd($xml_str);
     }
 }
