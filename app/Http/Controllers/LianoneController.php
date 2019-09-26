@@ -63,6 +63,14 @@ class LianoneController extends Controller
 	}
 
 
+	//删除
+	public function one_del(Request $request)
+	{
+		$req = $request->all();
+		dd($req);
+	}
+
+
 	//给粉丝打标签
 	public function one_biao()
 	{
@@ -118,8 +126,35 @@ class LianoneController extends Controller
 
 
 
-	public function one_tui()
+	public function one_tui(Request $request)
 	{
-		return view('lianone/one_tui');
+		return view('lianone/one_tui',['biao_id'=>$request->all()['biao_id']]);
+	}
+
+
+	public function one_tui_do(Request $request)
+	{
+		// $req = $request->except(['_token']);
+		// 
+		$req = $request->all();
+		// dd($req);
+		$url = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.$this->tools->get_wechat_access_token();
+		// dd($url);
+		$data = [
+			'filter'=>[
+				'is_to_all'=>false,
+				'biao_id'=>$req['biao_id']
+			],
+			'text'=>[
+				'content'=>$req['message']
+			],
+			'msgtype'=>'text'
+		];
+		// dd($data);
+		$res = $this->tools->curl_post($url,json_encode($data));
+		dd($res);
+		$result = json_decode($res,1);
+		dd($result);
+
 	}
 }

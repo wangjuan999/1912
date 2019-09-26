@@ -6,6 +6,12 @@ Route::any('event','EventController@event');
 Route::any('create_menu','MenuController@create_menu');
 Route::any('menu','MenuController@menu');
 Route::any('create_menu_do','MenuController@create_menu_do');
+//////////////////////////////////////////////////////////////////////////////////
+Route::any('addWechatCate','WechatCateController@addWechatCate');   // 个性化生成微信菜单
+Route::any('doaddcate','WechatCateController@doaddcate');   // 个性化生成微信菜单
+Route::any('listWechatCate','WechatCateController@listWechatCate');   // 个性化生成微信菜单
+Route::any('createwechatcate','WechatCateController@createwechatcate');   // 个性化生成微信菜单
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -202,10 +208,15 @@ route::get('send_template_message','TagController@send_template_message');
 
 //考试练习1
 route::get('lianone/one_list','LianoneController@one_list');
+route::get('lianone/one_del','LianoneController@one_del');
 // Route::get('login/logins','LoginController@logins');
 route::get('lianone/one_add','LianoneController@one_add');
 route::post('lianone/one_add_do','LianoneController@one_add_do');
 route::get('lianone/one_biao','LianoneController@one_biao');
 route::post('lianone/one_biao_do','LianoneController@one_biao_do');
 route::get('lianone/one_tui','LianoneController@one_tui');
+route::post('lianone/one_tui_do','LianoneController@one_tui_do');
 
+
+//模拟考试菜单
+route::get('menustest','EventController@menustest');

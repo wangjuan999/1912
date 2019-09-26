@@ -39,7 +39,8 @@ class MenuController extends Controller
         }
 
         //根据数据表翻译成菜单结构
-        $this->menu();
+        $zhanshi = $this->menu();
+        // dd($zhanshi);
         return redirect('create_menu');
     }
 
@@ -75,10 +76,9 @@ class MenuController extends Controller
                 ];
              }
             $data['button'][] = $arr;
-
            }
         } 
-// dd($data);
+dd($data);
 		$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->tools->get_wechat_access_token();
 		// // dd($url);
 		// 	$data = [
