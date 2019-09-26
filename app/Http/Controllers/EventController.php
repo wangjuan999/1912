@@ -2,8 +2,16 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
+use App\Tools\Tools;
+
 class EventController extends Controller
 {
+    public $tools;
+    public function __construct(Tools $tools)
+    {
+        $this->tools = $tools;
+    }
+
     /**
      * 接收微信发送的消息【用户互动】
      */
