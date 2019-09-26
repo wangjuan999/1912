@@ -206,3 +206,6 @@ route::get('lianone/one_list','LianoneController@one_list');
 route::get('lianone/one_add','LianoneController@one_add');
 route::post('lianone/one_add_do','LianoneController@one_add_do');
 route::get('lianone/one_biao','LianoneController@one_biao');
+route::post('lianone/one_biao_do','LianoneController@one_biao_do');
+route::get('lianone/one_tui','LianoneController@one_tui');
+

@@ -34,13 +34,28 @@
 			var openid = '';
 			var biao_id = '';
 			biao_id = GetQueryString('biao_id');
-			alert(biao_id);
+			// alert(biao_id);
+			
 					$(":checked").each(function(k,v){
 							openid += ','+$(this).parents('tr').attr('openid');
 					})
 					// alert(openid);
-					$.ajax({
-
+					$.ajax({						
+						url:"{{url('lianone/one_biao_do')}}",
+						data:{openid:openid,biao_id:biao_id},
+						type:'post',
+						dataType:'json',
+						success:function(res){
+							if(res == 1){
+								//成功
+								alert('打标签成功');
+								window.location.href='one_list';
+							}else{
+								//失败
+								alert('打标签失败');
+								window.history.back(0);
+							}
+						}
 					})
 
 

@@ -40,6 +40,7 @@ class MenuController extends Controller
 
         //根据数据表翻译成菜单结构
         $this->menu();
+        return redirect('create_menu');
     }
 
     public function menu_list()
@@ -116,7 +117,7 @@ class MenuController extends Controller
 		$re = $this->tools->curl_post($url,json_encode($data,JSON_UNESCAPED_UNICODE));
 		 // dd($re);
 		$result = json_decode($re,1);
-		dd($result);
+		// dd($result);
 
 
 	}

@@ -21,7 +21,8 @@
 				<td>{{$v['count']}}</td>
 				<td><a href="{{url('lianone/one_del/'.$v['id'])}}">删除</a> ||
 					<a href="">粉丝列表</a> ||
-					<a href="{{url('lianone/one_biao')}}?biao_id={{$v['id']}}">粉丝打标签</a>
+					<a href="{{url('lianone/one_biao')}}?biao_id={{$v['id']}}">粉丝打标签</a>||
+					<a href="{{url('lianone/one_tui')}}?biao_id={{$v['id']}}">推送标签</a>
 				</td>
 			</tr>
 			@endforeach

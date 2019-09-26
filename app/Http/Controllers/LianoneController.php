@@ -86,4 +86,40 @@ class LianoneController extends Controller
 		// dd($arr);
 		return view('lianone/one_biao',['arr'=>$arr]);
 	}
+
+
+	public function one_biao_do(Request $request)
+	{
+		//去掉左边的特殊符号‘，’
+		$arr = ltrim(request()->post('openid'),',');
+		//通过逗号将字符串拆分成数组
+		$openid = explode(',',$arr);
+		$biao_id = request()->post('biao_id');
+		$url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token='.$this->tools->get_wechat_access_token();
+		// dd($url);
+		$data = [
+			'openid_list'=>$openid,
+			'tagid'=>$biao_id
+		];
+		// $postdata = json_encode($data);
+		// dump($postdata);
+		$res = $this->tools->curl_post($url,json_encode($data));
+		$result = json_decode($res,1);
+		// dd($result);
+		if($result['errmsg'] == 'ok'){
+			echo 1;
+		}else{
+			echo 2;
+		}
+		// return redirect('lianone/one_list');
+		// echo 1;
+
+	} 
+
+
+
+	public function one_tui()
+	{
+		return view('lianone/one_tui');
+	}
 }
