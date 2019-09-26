@@ -73,7 +73,7 @@ class EventController extends Controller
         if($xml_arr['MsgType'] == 'event' && $xml_arr['Event'] == 'subscribe'){
             //获取用户 基本信息
             $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->get_wechat_access_token()."&openid=".$xml_arr['FromUserName']."&lang=zh_CN";
-            dd($url);
+            // dd($url);
             $userinfo = json_decode(file_get_contents($url),true);
             $msg = '你好'.$userinfo['nickname'].'同学，欢迎进入这个大家庭';
             $this->sendtextmsg($msg,$xml_arr);
