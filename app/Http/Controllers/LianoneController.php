@@ -29,10 +29,10 @@ class LianoneController extends Controller
  	public function logins_do()
  	{
  		$getUserInfo = $this->wechat->getUserInfo();
- 		dd($getUserInfo);
+ 		// dd($getUserInfo);
 		$openid=$getUserInfo['openid'];
 		$nickname = $getUserInfo['nickname'];
-		dd($nickname);
+		// dd($nickname);
  	}
 
 	//添加

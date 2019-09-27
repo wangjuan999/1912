@@ -59,35 +59,29 @@ class EventController extends Controller
         $xml_string = file_get_contents('php://input');  //获取微信返回数据（xml包）
         //记录访问日志
         $wechat_log_psth = storage_path('logs/wechat/'.date('Y-m-d').'.log');
-        file_put_contents($wechat_log_psth,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n",FILE_APPEND);
+       file_put_contents($wechat_log_psth,"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n",FILE_APPEND);
         file_put_contents($wechat_log_psth,$xml_string,FILE_APPEND);
         file_put_contents($wechat_log_psth,"\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n",FILE_APPEND);
         //dd($xml_string);
         //将xml包转为可执行对象
         $xml_obj = simplexml_load_string($xml_string,'SimpleXMLElement',LIBXML_NOCDATA);
         $xml_arr = (array)$xml_obj;
+        // dd($xml_arr);
         \Log::Info(json_encode($xml_arr,JSON_UNESCAPED_UNICODE));
 
         ///业务逻辑处理
         ///关注微信公众号时，回复文本消息成功
         if($xml_arr['MsgType'] == 'event' && $xml_arr['Event'] == 'subscribe'){
             //获取用户 基本信息
-            $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->get_wechat_access_token()."&openid=".$xml_arr['FromUserName']."&lang=zh_CN";
+            $url = "https://api.weixin.qq.com/cgi-bin/us7er/info?access_token=".$this->tools->get_wechat_access_token()."&openid=".$xml_arr['FromUserName']."&lang=zh_CN";
             // dd($url);
             $userinfo = json_decode(file_get_contents($url),true);
             $msg = '你好'.$userinfo['nickname'].'同学，欢迎进入这个大家庭';
             $this->sendtextmsg($msg,$xml_arr);
-        }elseif($xml_arr['Event'] == 'CLICK' && $xml_arr['EventKey'] == 'class'){
-            //当用户点击微信菜单的查看课程时
-            //查库操作。。。拼接数据
-            
-            $msg = '你好同学，今天课程';
-            $this->sendtextmsg($msg,$xml_arr);
-
         }elseif($xml_arr['Event'] == 'CLICK' && $xml_arr['EventKey'] == 'class1'){
             //当用户点击微信菜单的管理课程时
             return view('cate/class');
-
+            
         }
     }
     //封装好的发送文本消息方法
@@ -98,8 +92,8 @@ class EventController extends Controller
      */
     public function sendtextmsg($msg,$xml_arr)
     {
-        $str = "<xml><ToUserName><![CDATA[".$xml_arr['FromUserName']."]></ToUserName><FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName><CreateTime>".time()."</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[".$msg."]]></Content></xml>";
-        echo $str;        
+        $str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$msg.']]></Content></xml>';
+        echo $str;
     }
     /**
      * [getuserinfo description]
