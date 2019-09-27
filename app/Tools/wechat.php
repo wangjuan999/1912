@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\wechat;
+namespace App\Tools;
 
 /**
  * 非静默授权获取用户信息
@@ -10,7 +10,7 @@ class wechat
     public static function getUserInfo()
     {
 
-        $openid=session('openid');
+        $openid=session('openid'); 
         if($openid){
             return $openid;
         }
@@ -35,7 +35,7 @@ class wechat
         }else{
             $host=$_SERVER['HTTP_HOST'];
             $uri=$_SERVER['REQUEST_URI'];
-            $appid="wx4ae6e497586781c2";
+            $appid="wxb420b634b262c408";
             $redirect_uri=urlencode("http://".$host.$uri);
             $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=snsapi_userinfo&state=111#wechat_redirect";
             header("location:".$url);die;

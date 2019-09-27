@@ -5,22 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Tools\Tools;
+use App\Tools\wechat;
 
 class LianoneController extends Controller
 {
 
 	public $tools;
-    public function __construct(Tools $tools)
+	public $wechat;
+    public function __construct(Tools $tools,Wechat $wechat)
     {   
         $this->tools=$tools;
+        $this->wechat=$wechat;
     }
 
 	///第三方登录
-	// public function login()
-	// {
-	// 	return view('exam/login');
-	// } 
+	public function logins()
+	{
+		return view('lianone/logins');
+		
+ 	} 
 
+
+ 	public function logins_do()
+ 	{
+ 		$getUserInfo = $this->wechat->getUserInfo();
+ 		dd($getUserInfo);
+		$openid=$getUserInfo['openid'];
+		$nickname = $getUserInfo['nickname'];
+		dd($nickname);
+ 	}
 
 	//添加
 	public function one_add()

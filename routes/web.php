@@ -209,7 +209,8 @@ route::get('send_template_message','TagController@send_template_message');
 //考试练习1
 route::get('lianone/one_list','LianoneController@one_list');
 route::get('lianone/one_del','LianoneController@one_del');
-// Route::get('login/logins','LoginController@logins');
+Route::get('lianone/logins','LianoneController@logins');
+Route::get('lianone/logins_do','LianoneController@logins_do');
 route::get('lianone/one_add','LianoneController@one_add');
 route::post('lianone/one_add_do','LianoneController@one_add_do');
 route::get('lianone/one_biao','LianoneController@one_biao');
