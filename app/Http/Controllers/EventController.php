@@ -70,42 +70,45 @@ class EventController extends Controller
 
         ///业务逻辑处理
         ///关注微信公众号时，回复文本消息成功
-       
-    
-        //关注逻辑
         if($xml_arr['MsgType'] == 'event' && $xml_arr['Event'] == 'subscribe'){
-            //关注
-            //opnid拿到用户基本信息
-            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->tools->get_wechat_access_token().'&openid='.$xml_arr['FromUserName'].'&lang=zh_CN';
-            $user_re = file_get_contents($url);
-            $user_info = json_decode($user_re,1);
-            //存入数据库
-            $db_user = DB::connection('mysql_cart')->table("wechat_users")->where(['openid'=>$xml_arr['FromUserName']])->first();
-            if(empty($db_user)){
-                //没有数据，存入
-                DB::connection('mysql_cart')->table("wechat_users")->insert([
-                    'openid'=>$xml_arr['FromUserName'],
-                    'add_time'=>time()
-                ]);
-            }
-            $message = '欢迎'.$user_info['nickname'].'同学，感谢您的关注';
-            $xml_str = '<xml><ToUserName><![CDATA['.$xml_arr['FromUserName'].']]></ToUserName><FromUserName><![CDATA['.$xml_arr['ToUserName'].']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.$message.']]></Content></xml>';
-            echo $xml_str;
+            //获取用户 基本信息
+            $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->tools->get_wechat_access_token()."&openid=".$xml_arr['FromUserName']."&lang=zh_CN";
+            // dd($url);
+            $userinfo = json_decode(file_get_contents($url),true);
+            $msg = '你好'.$userinfo['nickname'].'同学，欢迎进入这个大家庭';
+            $this->sendtextmsg($msg,$xml_arr);
+        }elseif($xml_arr['Event'] == 'CLICK' && $xml_arr['EventKey'] == 'class'){
+            //当用户点击微信菜单的查看课程时
+            //查库操作。。。拼接数据
+            
+            $msg = '你好同学，今天课程';
+            $this->sendtextmsg($msg,$xml_arr);
+
+        }elseif($xml_arr['Event'] == 'CLICK' && $xml_arr['EventKey'] == 'class1'){
+            //当用户点击微信菜单的管理课程时
+            return view('cate/class');
+
         }
     }
-    
     //封装好的发送文本消息方法
     /**
      * [sendtextmsg description]
      * @param  [type] $msg [description]  需要发送的内容
      * @return [type]      [description]  没有返回值，不报错证明发送成功
      */
-
+    public function sendtextmsg($msg,$xml_arr)
+    {
+        $str = "<xml><ToUserName><![CDATA[".$xml_arr['FromUserName']."]></ToUserName><FromUserName><![CDATA[".$xml_arr['ToUserName']."]]></FromUserName><CreateTime>".time()."</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[".$msg."]]></Content></xml>";
+        echo $str;        
+    }
     /**
      * [getuserinfo description]
      * @return [type] [description]
      */
-
+    public function menustest()
+    {
+        dd(1);
+    }
 
 
 
