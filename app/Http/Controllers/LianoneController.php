@@ -80,7 +80,15 @@ class LianoneController extends Controller
 	public function one_del(Request $request)
 	{
 		$req = $request->all();
-		dd($req);
+		// dd($req);
+		$url = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=".$this->tools->get_wechat_access_token();
+		// dd($url);
+		// $data = [
+		// 	'tag'=> [
+		// 		'biao_id'=>$req['biao_id']
+		// 	]
+		// ];
+		// dd($data);
 	}
 
 
