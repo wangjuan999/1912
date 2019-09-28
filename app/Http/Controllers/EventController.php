@@ -73,16 +73,12 @@ class EventController extends Controller
         ///关注微信公众号时，回复文本消息成功
         if($xml_arr['MsgType'] == 'event' && $xml_arr['Event'] == 'subscribe'){
             //获取用户 基本信息
-            $url = "https://api.weixin.qq.com/cgi-bin/us7er/info?access_token=".$this->tools->get_wechat_access_token()."&openid=".$xml_arr['FromUserName']."&lang=zh_CN";
-            // dd($url);
+            $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->tools->get_wechat_access_token().'&openid='.$xml_arr['FromUserName'].'&lang=zh_CN';
+            dd($url);
             $userinfo = json_decode(file_get_contents($url),true);
-            
+            dd($userinfo);
             $msg = '你好'.$userinfo['nickname'].'当前时间为2019-9-28';
             $this->sendtextmsg($msg,$xml_arr);
-        }elseif($xml_arr['Event'] == 'CLICK' && $xml_arr['EventKey'] == 'class1'){
-            //当用户点击微信菜单的管理课程时
-            return view('cate/class');
-            
         }
     }
     //封装好的发送文本消息方法
