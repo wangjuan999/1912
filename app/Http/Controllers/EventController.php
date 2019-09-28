@@ -76,8 +76,8 @@ class EventController extends Controller
             $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->tools->get_wechat_access_token().'&openid='.$xml_arr['FromUserName'].'&lang=zh_CN';
             // dd($url);
             $userinfo = json_decode(file_get_contents($url),true);
-            dd($userinfo);
-            $msg = '你好'.$userinfo['nickname'].'当前时间为'.$userinfo['subscribe_time'].;
+            // dd($userinfo);
+            $msg = '你好'.$userinfo['nickname'].'当前时间为'.$userinfo['subscribe_time'];
             $this->sendtextmsg($msg,$xml_arr);
         }
     }
